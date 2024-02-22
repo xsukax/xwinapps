@@ -1,5 +1,5 @@
 MODE CON: COLS=120 LINES=35
-@TITLE Applications Installer by xsukax
+@TITLE Applications Installer and Bloatware Removal tool by xsukax
 @echo off
 color 0A
 goto MENU
@@ -9,162 +9,24 @@ CLS
 echo ---Note: Please Check the batch file before Installing any application---
 echo ---Note: This is My Personal script, I Published it for public benefit---
 echo ---Note: Modify the script as you see fit---
-echo --------------------------------
-echo Applications Installer by xsukax
-echo --------------------------------
-echo 1 - Install All Applications For Geeks.
-echo 2 - Install Only Needed Applications.
-echo 3 - Uninstall All Applications For Geeks.
+echo -----------------------------------------------------------
+echo Applications Installer and Bloatware Removal tool by xsukax
+echo -----------------------------------------------------------
+echo 1 - Remove Bloatware.
+echo 2 - Update All Installed Applications.
+echo 3 - Install Only Needed Applications.
 echo 4 - Uninstall Only Needed Applications.
-echo 5 - Remove Bloatware.
-echo 6 - Update All Installed Applications.
+echo 5 - Install All Applications For Geeks.
+echo 6 - Uninstall All Applications For Geeks.
 echo.
 SET /P choice=Enter your Choice:
-IF %choice%==1 GOTO GEEKSAPPS
-IF %choice%==2 GOTO MINIAPPS
-IF %choice%==3 GOTO UNGEEKSAPPS
+IF %choice%==1 GOTO BLOATREM
+IF %choice%==2 GOTO UPDATEAPPS
+IF %choice%==3 GOTO MINIAPPS
 IF %choice%==4 GOTO UNMINIAPPS
-IF %choice%==5 GOTO BLOATREM
-IF %choice%==6 GOTO UPDATEAPPS
+IF %choice%==5 GOTO GEEKSAPPS
+IF %choice%==6 GOTO UNGEEKSAPPS
 IF NOT "%choice%"=="1,2,3,4,5,6" goto BADCHOICE
-
-:GEEKSAPPS
-CLS
-echo -------------------------------------
-echo Installing All Applications For Geeks
-echo -------------------------------------
-winget install --id Microsoft.AppInstaller
-winget install --id 7zip.7zip
-winget install --id ShareX.ShareX
-winget install --id voidtools.Everything
-winget install --id FastStone.Viewer
-winget install --id PowTools.FileShredder
-winget install --id GIMP.GIMP
-winget install --id CrystalRich.LockHunter
-winget install --id Microsoft.WindowsTerminal
-winget install --id Mozilla.Firefox
-winget install --id Mozilla.Thunderbird
-winget install --id Mp3tag.Mp3tag
-winget install --id Notepad++.Notepad++
-winget install --id Stremio.Stremio
-winget install --id SumatraPDF.SumatraPDF
-winget install --id VideoLAN.VLC
-winget install --id Twilio.Authy
-winget install --id Balena.Etcher
-winget install --id qBittorrent.qBittorrent
-winget install --id WinSCP.WinSCP
-winget install --id clsid2.mpc-hc
-winget install --id subhra74.XtremeDownloadManager
-winget install --id IDRIX.VeraCrypt
-winget install --id SoftMaker.FreeOffice.2021
-winget install --id Oracle.VirtualBox
-winget install --id KeePassXCTeam.KeePassXC
-winget install --id Famatech.AdvancedIPScanner
-winget install --id Google.NearbyShare
-winget install --id tailscale.tailscale
-winget install --id SyncTrayzor.SyncTrayzor
-winget install --id Audacity.Audacity
-winget install --id yt-dlp.yt-dlp
-winget install --id yt-dlg.yt-dlg
-winget install --id Codeblocks.Codeblocks
-winget install --id KDE.Kdenlive
-winget install --id HandBrake.HandBrake
-pause
-GOTO MENU
-
-:MINIAPPS
-CLS
-echo -----------------------------------
-echo Installing Only Needed Applications
-echo -----------------------------------
-winget install --id Microsoft.AppInstaller
-winget install --id 7zip.7zip
-winget install --id ShareX.ShareX
-winget install --id voidtools.Everything
-winget install --id FastStone.Viewer
-winget install --id GIMP.GIMP
-winget install --id Mozilla.Firefox
-winget install --id Mozilla.Thunderbird
-winget install --id Stremio.Stremio
-winget install --id SumatraPDF.SumatraPDF
-winget install --id VideoLAN.VLC
-winget install --id qBittorrent.qBittorrent
-winget install --id clsid2.mpc-hc
-winget install --id subhra74.XtremeDownloadManager
-winget install --id SoftMaker.FreeOffice.2021
-winget install --id Google.NearbyShare
-winget install --id yt-dlp.yt-dlp
-winget install --id yt-dlg.yt-dlg
-pause
-GOTO MENU
-
-:UNGEEKSAPPS
-CLS
-echo ---------------------------------------
-echo Uninstalling All Applications For Geeks
-echo ---------------------------------------
-winget uninstall --id 7zip.7zip
-winget uninstall --id ShareX.ShareX
-winget uninstall --id voidtools.Everything
-winget uninstall --id FastStone.Viewer
-winget uninstall --id PowTools.FileShredder
-winget uninstall --id GIMP.GIMP
-winget uninstall --id CrystalRich.LockHunter
-winget uninstall --id Microsoft.WindowsTerminal
-winget uninstall --id Mozilla.Firefox
-winget uninstall --id Mozilla.Thunderbird
-winget uninstall --id Mp3tag.Mp3tag
-winget uninstall --id Notepad++.Notepad++
-winget uninstall --id Stremio.Stremio
-winget uninstall --id SumatraPDF.SumatraPDF
-winget uninstall --id VideoLAN.VLC
-winget uninstall --id Twilio.Authy
-winget uninstall --id Balena.Etcher
-winget uninstall --id qBittorrent.qBittorrent
-winget uninstall --id WinSCP.WinSCP
-winget uninstall --id clsid2.mpc-hc
-winget uninstall --id subhra74.XtremeDownloadManager
-winget uninstall --id IDRIX.VeraCrypt
-winget uninstall --id SoftMaker.FreeOffice.2021
-winget uninstall --id Oracle.VirtualBox
-winget uninstall --id KeePassXCTeam.KeePassXC
-winget uninstall --id Famatech.AdvancedIPScanner
-winget uninstall --id Google.NearbyShare
-winget uninstall --id tailscale.tailscale
-winget uninstall --id SyncTrayzor.SyncTrayzor
-winget uninstall --id Audacity.Audacity
-winget uninstall --id yt-dlp.yt-dlp
-winget uninstall --id yt-dlg.yt-dlg
-winget uninstall --id Codeblocks.Codeblocks
-winget uninstall --id KDE.Kdenlive
-winget uninstall --id HandBrake.HandBrake
-pause
-GOTO MENU
-
-:UNMINIAPPS
-CLS
-echo -------------------------------------
-echo Uninstalling Only Needed Applications
-echo -------------------------------------
-winget uninstall --id 7zip.7zip
-winget uninstall --id ShareX.ShareX
-winget uninstall --id voidtools.Everything
-winget uninstall --id FastStone.Viewer
-winget uninstall --id GIMP.GIMP
-winget uninstall --id Mozilla.Firefox
-winget uninstall --id Mozilla.Thunderbird
-winget uninstall --id Stremio.Stremio
-winget uninstall --id SumatraPDF.SumatraPDF
-winget uninstall --id VideoLAN.VLC
-winget uninstall --id qBittorrent.qBittorrent
-winget uninstall --id clsid2.mpc-hc
-winget uninstall --id subhra74.XtremeDownloadManager
-winget uninstall --id SoftMaker.FreeOffice.2021
-winget uninstall --id Google.NearbyShare
-winget uninstall --id yt-dlp.yt-dlp
-winget uninstall --id yt-dlg.yt-dlg
-pause
-GOTO MENU
 
 :BLOATREM
 CLS
@@ -216,6 +78,191 @@ echo -----------------------------------
 echo Updating All Installed Applications
 echo -----------------------------------
 winget update --all
+pause
+GOTO MENU
+
+:MINIAPPS
+CLS
+echo -----------------------------------
+echo Installing Only Needed Applications
+echo -----------------------------------
+echo 7zip is Free and open source file archiver with a high compression ratio.
+winget install --id 7zip.7zip
+echo ShareX is a lightweight free and open source program that allows you to capture or record any area of your screen and share it with a single press of a key.
+winget install --id ShareX.ShareX
+echo Everything is search engine that locates files and folders by filename instantly for Windows.
+winget install --id voidtools.Everything
+echo FastStone Image Viewer is a fast, stable, user-friendly image browser, converter and editor.
+winget install --id FastStone.Viewer
+echo GIMP is an acronym for GNU Image Manipulation Program.
+winget install --id GIMP.GIMP
+echo Firefox Browser is a free and open-source web browser developed by the Mozilla Foundation
+winget install --id Mozilla.Firefox
+echo Thunderbird is a free email application that is easy to set up and customize and it's loaded with great features.
+winget install --id Mozilla.Thunderbird
+echo Sumatra PDF is a free PDF, eBook (ePub, Mobi), XPS, DjVu, CHM, Comic Book (CBZ and CBR) viewer for Windows.
+winget install --id SumatraPDF.SumatraPDF
+echo VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files.
+winget install --id VideoLAN.VLC
+echo qBittorrent is a bittorrent client programmed in C++ / Qt that uses libtorrent.
+winget install --id qBittorrent.qBittorrent
+echo MPC-HC is an extremely light-weight, open source media player for Windows.
+winget install --id clsid2.mpc-hc
+echo XDM is a powerful Download Manager for windows.
+winget install --id subhra74.XtremeDownloadManager
+echo SoftMaker FreeOffice 2021 is an alternative to Microsoft Office.
+winget install --id SoftMaker.FreeOffice.2021
+echo Google NearbyShare helps you to Send and receive photos, documents and more between nearby Android devices and Windows PCs.
+winget install --id Google.NearbyShare
+echo yt-dlp is a youtube-dl fork based on the now inactive youtube-dlc.
+winget install --id yt-dlp.yt-dlp
+echo yt-dlg is A cross platform front-end GUI of the popular youtube-dl written in wxPython.
+winget install --id yt-dlg.yt-dlg
+pause
+GOTO MENU
+
+:UNMINIAPPS
+CLS
+echo -------------------------------------
+echo Uninstalling Only Needed Applications
+echo -------------------------------------
+winget uninstall --id 7zip.7zip
+winget uninstall --id ShareX.ShareX
+winget uninstall --id voidtools.Everything
+winget uninstall --id FastStone.Viewer
+winget uninstall --id GIMP.GIMP
+winget uninstall --id Mozilla.Firefox
+winget uninstall --id Mozilla.Thunderbird
+winget uninstall --id SumatraPDF.SumatraPDF
+winget uninstall --id VideoLAN.VLC
+winget uninstall --id qBittorrent.qBittorrent
+winget uninstall --id clsid2.mpc-hc
+winget uninstall --id subhra74.XtremeDownloadManager
+winget uninstall --id SoftMaker.FreeOffice.2021
+winget uninstall --id Google.NearbyShare
+winget uninstall --id yt-dlp.yt-dlp
+winget uninstall --id yt-dlg.yt-dlg
+pause
+GOTO MENU
+
+:GEEKSAPPS
+CLS
+echo -------------------------------------
+echo Installing All Applications For Geeks
+echo -------------------------------------
+echo 7zip is Free and open source file archiver with a high compression ratio.
+winget install --id 7zip.7zip
+echo ShareX is a lightweight free and open source program that allows you to capture or record any area of your screen and share it with a single press of a key.
+winget install --id ShareX.ShareX
+echo Everything is search engine that locates files and folders by filename instantly for Windows.
+winget install --id voidtools.Everything
+echo FastStone Image Viewer is a fast, stable, user-friendly image browser, converter and editor.
+winget install --id FastStone.Viewer
+echo File Shredder by PowTools.
+winget install --id PowTools.FileShredder
+echo GIMP is an acronym for GNU Image Manipulation Program.
+winget install --id GIMP.GIMP
+echo LockHunter is a free tool to delete files blocked by something you do not know.
+winget install --id CrystalRich.LockHunter
+echo Windows Terminal is a new, modern, feature-rich, productive terminal application for command-line users.
+winget install --id Microsoft.WindowsTerminal
+echo Firefox Browser is a free and open-source web browser developed by the Mozilla Foundation
+winget install --id Mozilla.Firefox
+echo Thunderbird is a free email application that is easy to set up and customize and it's loaded with great features.
+winget install --id Mozilla.Thunderbird
+echo Mp3tag is a powerful and easy-to-use tool to edit metadata of audio files.
+winget install --id Mp3tag.Mp3tag
+echo Notepad++ is a free source code editor and Notepad replacement that supports several languages.
+winget install --id Notepad++.Notepad++
+echo Stremio is a modern media center that's a one-stop solution for your video entertainment.
+winget install --id Stremio.Stremio
+echo Sumatra PDF is a free PDF, eBook (ePub, Mobi), XPS, DjVu, CHM, Comic Book (CBZ and CBR) viewer for Windows.
+winget install --id SumatraPDF.SumatraPDF
+echo VLC is a free and open source cross-platform multimedia player and framework that plays most multimedia files.
+winget install --id VideoLAN.VLC
+echo Authy is secure 2-step verification app, It helps you protect your account from hackers and hijackers by adding an additional layer of security.
+winget install --id Twilio.Authy
+echo Etcher is a powerful OS image flasher built with web technologies to ensure flashing an SDCard or USB drive is a pleasant and safe experience.
+winget install --id Balena.Etcher
+echo qBittorrent is a bittorrent client programmed in C++ / Qt that uses libtorrent.
+winget install --id qBittorrent.qBittorrent
+echo WinSCP is an open source free SFTP client, FTP client, WebDAV client, S3 client and SCP client for Windows.
+winget install --id WinSCP.WinSCP
+echo MPC-HC is an extremely light-weight, open source media player for Windows.
+winget install --id clsid2.mpc-hc
+echo XDM is a powerful Download Manager for windows.
+winget install --id subhra74.XtremeDownloadManager
+echo VeraCrypt is a software for establishing and maintaining an on-the-fly-encrypted volume (data storage device).
+winget install --id IDRIX.VeraCrypt
+echo SoftMaker FreeOffice 2021 is an alternative to Microsoft Office.
+winget install --id SoftMaker.FreeOffice.2021
+echo VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product for enterprise as well as home use.
+winget install --id Oracle.VirtualBox
+echo KeePassXC is a cross-platform password manager that allows you to store all of your passwords in one location.
+winget install --id KeePassXCTeam.KeePassXC
+echo Advanced IP Scanner shows all network devices, gives you access to shared folders.
+winget install --id Famatech.AdvancedIPScanner
+echo Google NearbyShare helps you to Send and receive photos, documents and more between nearby Android devices and Windows PCs.
+winget install --id Google.NearbyShare
+echo Tailscale is a WireGuard based mesh VPN, used to connect your computers and other devices together securely without proxies.
+winget install --id tailscale.tailscale
+echo SyncTrayzor is a little tray utility for Syncthing on Windows.
+winget install --id SyncTrayzor.SyncTrayzor
+echo Audacity is a free, easy-to-use, multi-track audio editor and recorder.
+winget install --id Audacity.Audacity
+echo yt-dlp is a youtube-dl fork based on the now inactive youtube-dlc.
+winget install --id yt-dlp.yt-dlp
+echo yt-dlg is A cross platform front-end GUI of the popular youtube-dl written in wxPython.
+winget install --id yt-dlg.yt-dlg
+echo CodeBlocks is Free open-source C/C++/Fortran IDE (includes additional GCC/G++ compiler and GDB debugger).
+winget install --id Codeblocks.Codeblocks
+echo Kdenlive is an acronym for KDE Non-Linear Video Editor.
+winget install --id KDE.Kdenlive
+echo HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs.
+winget install --id HandBrake.HandBrake
+pause
+GOTO MENU
+
+:UNGEEKSAPPS
+CLS
+echo ---------------------------------------
+echo Uninstalling All Applications For Geeks
+echo ---------------------------------------
+winget uninstall --id 7zip.7zip
+winget uninstall --id ShareX.ShareX
+winget uninstall --id voidtools.Everything
+winget uninstall --id FastStone.Viewer
+winget uninstall --id PowTools.FileShredder
+winget uninstall --id GIMP.GIMP
+winget uninstall --id CrystalRich.LockHunter
+winget uninstall --id Microsoft.WindowsTerminal
+winget uninstall --id Mozilla.Firefox
+winget uninstall --id Mozilla.Thunderbird
+winget uninstall --id Mp3tag.Mp3tag
+winget uninstall --id Notepad++.Notepad++
+winget uninstall --id Stremio.Stremio
+winget uninstall --id SumatraPDF.SumatraPDF
+winget uninstall --id VideoLAN.VLC
+winget uninstall --id Twilio.Authy
+winget uninstall --id Balena.Etcher
+winget uninstall --id qBittorrent.qBittorrent
+winget uninstall --id WinSCP.WinSCP
+winget uninstall --id clsid2.mpc-hc
+winget uninstall --id subhra74.XtremeDownloadManager
+winget uninstall --id IDRIX.VeraCrypt
+winget uninstall --id SoftMaker.FreeOffice.2021
+winget uninstall --id Oracle.VirtualBox
+winget uninstall --id KeePassXCTeam.KeePassXC
+winget uninstall --id Famatech.AdvancedIPScanner
+winget uninstall --id Google.NearbyShare
+winget uninstall --id tailscale.tailscale
+winget uninstall --id SyncTrayzor.SyncTrayzor
+winget uninstall --id Audacity.Audacity
+winget uninstall --id yt-dlp.yt-dlp
+winget uninstall --id yt-dlg.yt-dlg
+winget uninstall --id Codeblocks.Codeblocks
+winget uninstall --id KDE.Kdenlive
+winget uninstall --id HandBrake.HandBrake
 pause
 GOTO MENU
 
