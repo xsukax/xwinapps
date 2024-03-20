@@ -47,6 +47,8 @@ echo 3 - Install Only Needed Applications.
 echo 4 - Uninstall Only Needed Applications.
 echo 5 - Install All Applications For Geeks.
 echo 6 - Uninstall All Applications For Geeks.
+echo 7 - Register Internet Download Manager (IDM). 
+echo 8 - Activate Windows and Office.
 echo.
 SET /P choice=Enter your Choice:
 IF %choice%==1 GOTO BLOATREM
@@ -55,7 +57,9 @@ IF %choice%==3 GOTO MINIAPPS
 IF %choice%==4 GOTO UNMINIAPPS
 IF %choice%==5 GOTO GEEKSAPPS
 IF %choice%==6 GOTO UNGEEKSAPPS
-IF NOT "%choice%"=="1,2,3,4,5,6" goto BADCHOICE
+IF %choice%==7 GOTO REGIDM
+IF %choice%==8 GOTO ACTWO
+IF NOT "%choice%"=="1,2,3,4,5,6,7,8" goto BADCHOICE
 
 :BLOATREM
 CLS
@@ -137,16 +141,14 @@ echo qBittorrent is a bittorrent client programmed in C++ / Qt that uses libtorr
 winget install --id qBittorrent.qBittorrent
 echo MPC-HC is an extremely light-weight, open source media player for Windows.
 winget install --id clsid2.mpc-hc
-echo XDM is a powerful Download Manager for windows.
-winget install --id subhra74.XtremeDownloadManager
-echo SoftMaker FreeOffice 2021 is an alternative to Microsoft Office.
-winget install --id SoftMaker.FreeOffice.2021
 echo Google NearbyShare helps you to Send and receive photos, documents and more between nearby Android devices and Windows PCs.
 winget install --id Google.NearbyShare
 echo yt-dlp is a youtube-dl fork based on the now inactive youtube-dlc.
 winget install --id yt-dlp.yt-dlp
 echo yt-dlg is A cross platform front-end GUI of the popular youtube-dl written in wxPython.
 winget install --id yt-dlg.yt-dlg
+echo Internet Download Manager (IDM) is a tool to increase download speeds by up to 5 times, resume and schedule downloads.
+winget install --id Tonec.InternetDownloadManager
 pause
 GOTO MENU
 
@@ -166,11 +168,10 @@ winget uninstall --id SumatraPDF.SumatraPDF
 winget uninstall --id VideoLAN.VLC
 winget uninstall --id qBittorrent.qBittorrent
 winget uninstall --id clsid2.mpc-hc
-winget uninstall --id subhra74.XtremeDownloadManager
-winget uninstall --id SoftMaker.FreeOffice.2021
 winget uninstall --id Google.NearbyShare
 winget uninstall --id yt-dlp.yt-dlp
 winget uninstall --id yt-dlg.yt-dlg
+winget uninstall --id Tonec.InternetDownloadManager
 pause
 GOTO MENU
 
@@ -219,12 +220,8 @@ echo WinSCP is an open source free SFTP client, FTP client, WebDAV client, S3 cl
 winget install --id WinSCP.WinSCP
 echo MPC-HC is an extremely light-weight, open source media player for Windows.
 winget install --id clsid2.mpc-hc
-echo XDM is a powerful Download Manager for windows.
-winget install --id subhra74.XtremeDownloadManager
 echo VeraCrypt is a software for establishing and maintaining an on-the-fly-encrypted volume (data storage device).
 winget install --id IDRIX.VeraCrypt
-echo SoftMaker FreeOffice 2021 is an alternative to Microsoft Office.
-winget install --id SoftMaker.FreeOffice.2021
 echo VirtualBox is a powerful x86 and AMD64/Intel64 virtualization product for enterprise as well as home use.
 winget install --id Oracle.VirtualBox
 echo KeePassXC is a cross-platform password manager that allows you to store all of your passwords in one location.
@@ -249,6 +246,8 @@ echo Kdenlive is an acronym for KDE Non-Linear Video Editor.
 winget install --id KDE.Kdenlive
 echo HandBrake is a tool for converting video from nearly any format to a selection of modern, widely supported codecs.
 winget install --id HandBrake.HandBrake
+echo Internet Download Manager (IDM) is a tool to increase download speeds by up to 5 times, resume and schedule downloads.
+winget install --id Tonec.InternetDownloadManager
 pause
 GOTO MENU
 
@@ -277,9 +276,7 @@ winget uninstall --id Balena.Etcher
 winget uninstall --id qBittorrent.qBittorrent
 winget uninstall --id WinSCP.WinSCP
 winget uninstall --id clsid2.mpc-hc
-winget uninstall --id subhra74.XtremeDownloadManager
 winget uninstall --id IDRIX.VeraCrypt
-winget uninstall --id SoftMaker.FreeOffice.2021
 winget uninstall --id Oracle.VirtualBox
 winget uninstall --id KeePassXCTeam.KeePassXC
 winget uninstall --id Famatech.AdvancedIPScanner
@@ -292,7 +289,24 @@ winget uninstall --id yt-dlg.yt-dlg
 winget uninstall --id Codeblocks.Codeblocks
 winget uninstall --id KDE.Kdenlive
 winget uninstall --id HandBrake.HandBrake
+winget uninstall --id Tonec.InternetDownloadManager
 pause
+GOTO MENU
+
+:REGIDM
+::Script Project Link https://github.com/lstprjct/IDM-Activation-Script
+SET downloadUrl=https://raw.githubusercontent.com/lstprjct/IDM-Activation-Script/main/IAS.cmd
+SET tempFile="C:\regidm-xsukax.cmd"
+BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
+CMD /c %tempFile%
+GOTO MENU
+
+:ACTWO
+::Script Project Link https://github.com/massgravel/Microsoft-Activation-Scripts
+SET downloadUrl=https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/master/MAS/All-In-One-Version/MAS_AIO-CRC32_9AE8AFBA.cmd
+SET tempFile="C:\actwo-xsukax.cmd"
+BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
+CMD /c %tempFile%
 GOTO MENU
 
 :BADCHOICE
