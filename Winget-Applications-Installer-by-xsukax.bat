@@ -47,8 +47,7 @@ echo 3 - Install Only Needed Applications.
 echo 4 - Uninstall Only Needed Applications.
 echo 5 - Install All Applications For Geeks.
 echo 6 - Uninstall All Applications For Geeks.
-echo 7 - Register Internet Download Manager (IDM). 
-echo 8 - Activate Windows and Office.
+echo 7 - Software Activation Scripts.
 echo.
 SET /P choice=Enter your Choice:
 IF %choice%==1 GOTO BLOATREM
@@ -57,9 +56,8 @@ IF %choice%==3 GOTO MINIAPPS
 IF %choice%==4 GOTO UNMINIAPPS
 IF %choice%==5 GOTO GEEKSAPPS
 IF %choice%==6 GOTO UNGEEKSAPPS
-IF %choice%==7 GOTO REGIDM
-IF %choice%==8 GOTO ACTWO
-IF NOT "%choice%"=="1,2,3,4,5,6,7,8" goto BADCHOICE
+IF %choice%==7 GOTO ACTIVATORS
+IF NOT "%choice%"=="1,2,3,4,5,6,7" goto BADCHOICE
 
 :BLOATREM
 CLS
@@ -293,13 +291,22 @@ winget uninstall --id Tonec.InternetDownloadManager
 pause
 GOTO MENU
 
-:REGIDM
-::Script Project Link https://github.com/lstprjct/IDM-Activation-Script
-SET downloadUrl=https://raw.githubusercontent.com/lstprjct/IDM-Activation-Script/main/IAS.cmd
-SET tempFile="C:\regidm-xsukax.cmd"
-BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
-CMD /c %tempFile%
-GOTO MENU
+:ACTIVATORS
+CLS
+echo ----------------------------
+echo Software Activation Scripts.
+echo ----------------------------
+echo 1 - Activate Windows and Office.
+echo 2 - Register Internet Download Manager (IDM). 
+echo 3 - Register Winrar. 
+echo 4 - Back to Menu.
+echo.
+SET /P choice=Enter your Choice:
+IF %choice%==1 GOTO ACTWO
+IF %choice%==2 GOTO REGIDM
+IF %choice%==3 GOTO ACTRAR
+IF %choice%==4 GOTO MENU
+IF NOT "%choice%"=="1,2,3,4" goto BADCHOICE
 
 :ACTWO
 ::Script Project Link https://github.com/massgravel/Microsoft-Activation-Scripts
@@ -307,7 +314,23 @@ SET downloadUrl=https://raw.githubusercontent.com/massgravel/Microsoft-Activatio
 SET tempFile="C:\actwo-xsukax.cmd"
 BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
 CMD /c %tempFile%
-GOTO MENU
+GOTO ACTIVATORS
+
+:REGIDM
+::Script Project Link https://github.com/lstprjct/IDM-Activation-Script
+SET downloadUrl=https://raw.githubusercontent.com/lstprjct/IDM-Activation-Script/main/IAS.cmd
+SET tempFile="C:\regidm-xsukax.cmd"
+BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
+CMD /c %tempFile%
+GOTO ACTIVATORS
+
+:ACTRAR
+::Script Project Link https://github.com/NaeemBolchhi/WinRAR-Activator
+SET downloadUrl=https://raw.githubusercontent.com/NaeemBolchhi/WinRAR-Activator/main/WRA-20230312191859.cmd
+SET tempFile="C:\actrar-xsukax.cmd"
+BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
+CMD /c %tempFile%
+GOTO ACTIVATORS
 
 :BADCHOICE
 echo -----------
