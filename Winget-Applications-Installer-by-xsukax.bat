@@ -295,6 +295,7 @@ GOTO MENU
 IF EXIST "%~dp0\actwo-xsukax.cmd" ( del "%~dp0\actwo-xsukax.cmd" )
 IF EXIST "%~dp0\regidm-xsukax.cmd" ( del "%~dp0\regidm-xsukax.cmd" )
 IF EXIST "%~dp0\actrar-xsukax.cmd" ( del "%~dp0\actrar-xsukax.cmd" )
+IF EXIST "%~dp0\winclean-xsukax.cmd" ( del "%~dp0\winclean-xsukax.cmd" )
 goto SYSADMIN
 
 :SYSADMIN
@@ -305,18 +306,20 @@ echo -------------------
 echo 1 - Activate Windows and Office.
 echo 2 - Register Internet Download Manager (IDM). 
 echo 3 - Register Winrar. 
-echo 4 - Restore Wifi Password.
-echo 5 - Net Purge and Flush DNS.
-echo 6 - Back to Menu.
+echo 4 - Windows Temp Files Cleaner.
+echo 5 - Restore Wifi Password.
+echo 6 - Net Purge and Flush DNS.
+echo 7 - Back to Menu.
 echo.
 SET /P choice=Enter your Choice:
 IF %choice%==1 GOTO ACTWO
 IF %choice%==2 GOTO REGIDM
 IF %choice%==3 GOTO ACTRAR
-IF %choice%==4 GOTO WIFIPASS
-IF %choice%==5 GOTO NETPURGE
-IF %choice%==6 GOTO MENU
-IF NOT "%choice%"=="1,2,3,4,5,6" goto BADCHOICE
+IF %choice%==4 GOTO WINCLEAN
+IF %choice%==5 GOTO WIFIPASS
+IF %choice%==6 GOTO NETPURGE
+IF %choice%==7 GOTO MENU
+IF NOT "%choice%"=="1,2,3,4,5,6,7" goto BADCHOICE
 
 :ACTWO
 ::Script Project Link https://github.com/massgravel/Microsoft-Activation-Scripts
@@ -340,6 +343,15 @@ GOTO SYSADMIN
 ::Script Project Link https://github.com/NaeemBolchhi/WinRAR-Activator
 SET downloadUrl=https://raw.githubusercontent.com/NaeemBolchhi/WinRAR-Activator/main/WRA-20230312191859.cmd
 SET "tempFile=%~dp0\actrar-xsukax.cmd"
+BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
+::CMD /c %tempFile%
+call %tempFile%
+GOTO SYSADMIN
+
+:WINCLEAN
+::Script Project Link https://github.com/TarikSeyceri/Windows-Cleaner.bat
+SET downloadUrl=https://raw.githubusercontent.com/xsukax/Windows-Cleaner.bat/master/WindowsCleaner.bat
+SET "tempFile=%~dp0\winclean-xsukax.cmd"
 BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
 ::CMD /c %tempFile%
 call %tempFile%
