@@ -47,7 +47,7 @@ echo 3 - Install Only Needed Applications.
 echo 4 - Uninstall Only Needed Applications.
 echo 5 - Install All Applications For Geeks.
 echo 6 - Uninstall All Applications For Geeks.
-echo 7 - Software Activation Scripts.
+echo 7 - System Admin Tools.
 echo.
 SET /P choice=Enter your Choice:
 IF %choice%==1 GOTO BLOATREM
@@ -56,7 +56,7 @@ IF %choice%==3 GOTO MINIAPPS
 IF %choice%==4 GOTO UNMINIAPPS
 IF %choice%==5 GOTO GEEKSAPPS
 IF %choice%==6 GOTO UNGEEKSAPPS
-IF %choice%==7 GOTO ACTIVATORS
+IF %choice%==7 GOTO DELTEMP
 IF NOT "%choice%"=="1,2,3,4,5,6,7" goto BADCHOICE
 
 :BLOATREM
@@ -291,46 +291,166 @@ winget uninstall --id Tonec.InternetDownloadManager
 pause
 GOTO MENU
 
-:ACTIVATORS
+:DELTEMP
+IF EXIST "%~dp0\actwo-xsukax.cmd" ( del "%~dp0\actwo-xsukax.cmd" )
+IF EXIST "%~dp0\regidm-xsukax.cmd" ( del "%~dp0\regidm-xsukax.cmd" )
+IF EXIST "%~dp0\actrar-xsukax.cmd" ( del "%~dp0\actrar-xsukax.cmd" )
+goto SYSADMIN
+
+:SYSADMIN
 CLS
-echo ----------------------------
-echo Software Activation Scripts.
-echo ----------------------------
+echo -------------------
+echo System Admin Tools.
+echo -------------------
 echo 1 - Activate Windows and Office.
 echo 2 - Register Internet Download Manager (IDM). 
 echo 3 - Register Winrar. 
-echo 4 - Back to Menu.
+echo 4 - Restore Wifi Password.
+echo 5 - Net Purge and Flush DNS.
+echo 6 - Back to Menu.
 echo.
 SET /P choice=Enter your Choice:
 IF %choice%==1 GOTO ACTWO
 IF %choice%==2 GOTO REGIDM
 IF %choice%==3 GOTO ACTRAR
-IF %choice%==4 GOTO MENU
-IF NOT "%choice%"=="1,2,3,4" goto BADCHOICE
+IF %choice%==4 GOTO WIFIPASS
+IF %choice%==5 GOTO NETPURGE
+IF %choice%==6 GOTO MENU
+IF NOT "%choice%"=="1,2,3,4,5,6" goto BADCHOICE
 
 :ACTWO
 ::Script Project Link https://github.com/massgravel/Microsoft-Activation-Scripts
-SET downloadUrl=https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/master/MAS/All-In-One-Version/MAS_AIO-CRC32_9AE8AFBA.cmd
-SET tempFile="C:\actwo-xsukax.cmd"
+SET downloadUrl=https://raw.githubusercontent.com/massgravel/Microsoft-Activation-Scripts/master/MAS/All-In-One-Version/MAS_AIO-CRC32_60BA35A8.cmd
+SET "tempFile=%~dp0\actwo-xsukax.cmd"
 BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
-CMD /c %tempFile%
-GOTO ACTIVATORS
+::CMD /c %tempFile%
+call %tempFile%
+GOTO SYSADMIN
 
 :REGIDM
 ::Script Project Link https://github.com/lstprjct/IDM-Activation-Script
 SET downloadUrl=https://raw.githubusercontent.com/lstprjct/IDM-Activation-Script/main/IAS.cmd
-SET tempFile="C:\regidm-xsukax.cmd"
+SET "tempFile=%~dp0\regidm-xsukax.cmd"
 BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
-CMD /c %tempFile%
-GOTO ACTIVATORS
+::CMD /c %tempFile%
+call %tempFile%
+GOTO SYSADMIN
 
 :ACTRAR
 ::Script Project Link https://github.com/NaeemBolchhi/WinRAR-Activator
 SET downloadUrl=https://raw.githubusercontent.com/NaeemBolchhi/WinRAR-Activator/main/WRA-20230312191859.cmd
-SET tempFile="C:\actrar-xsukax.cmd"
+SET "tempFile=%~dp0\actrar-xsukax.cmd"
 BITSADMIN /transfer /download %downloadUrl% %tempFile% >nul
-CMD /c %tempFile%
-GOTO ACTIVATORS
+::CMD /c %tempFile%
+call %tempFile%
+GOTO SYSADMIN
+
+:WIFIPASS
+
+REM ECHO DEBUGGING: Beginning Main execution block.
+REM - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+CLS
+
+netsh wlan show profile
+
+SET /P "_SSID=Enter SSID name: "
+
+REM - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+IF EXIST "%_TEXT_OUTPUT_FILE%" DEL /Q "%_TEXT_OUTPUT_FILE%" & REM Clean-up temp file ASAP.
+IF EXIST "%_ERROR_OUTPUT_FILE%" DEL /Q "%_ERROR_OUTPUT_FILE%" & REM Clean-up temp file ASAP.
+
+SET "_TEXT_OUTPUT_FILE=%TEMP%\%RANDOM%-%RANDOM%-%RANDOM%-%RANDOM%.txt"
+SET "_ERROR_OUTPUT_FILE=%TEMP%\%RANDOM%-%RANDOM%-%RANDOM%-%RANDOM%.txt"
+
+netsh wlan show profile "%_SSID%" key=clear >"%_TEXT_OUTPUT_FILE%" 2>"%_ERROR_OUTPUT_FILE%" 
+
+netsh wlan show profile "%_SSID%" key=clear && SET "_COMMAND_EXIT=SUCCESS" || SET "_COMMAND_EXIT=FAILURE"
+REM ECHO DEBUGGING: %%_COMMAND_EXIT%% = %_COMMAND_EXIT%
+
+REM - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+IF "%_COMMAND_EXIT%"=="SUCCESS" (
+	REM If command succeeds:
+	REM ECHO DEBUGGING: Command succeeded^^!
+	ECHO - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	TYPE "%_TEXT_OUTPUT_FILE%" | FIND "Key Content"
+	REM ECHO DEBUGGING: ErrorLevel = !ERRORLEVEL!
+	IF !ERRORLEVEL! NEQ 0 ECHO No password found.
+	
+	REM FIND "Key Content" <"%_TEXT_OUTPUT_FILE%"
+	REM ECHO DEBUGGING: ErrorLevel = !ERRORLEVEL!
+	REM IF !ERRORLEVEL! NEQ 0 ECHO No password found.
+	ECHO - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	DEL /Q "%_TEXT_OUTPUT_FILE%" & REM Clean-up temp file ASAP.
+)
+IF EXIST "%_TEXT_OUTPUT_FILE%" DEL /Q "%_TEXT_OUTPUT_FILE%" & REM Clean-up temp file ASAP.
+
+REM - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+REM Bugfix: always include "tokens=*" to handle filenames with spaces.
+SET "_FILE_SIZE="
+FOR /F "tokens=*" %%G IN ("%_ERROR_OUTPUT_FILE%") DO SET "_FILE_SIZE=%%~zG"
+REM ECHO DEBUGGING: "%%_FILE_SIZE%%" = "%_FILE_SIZE%"
+
+IF "%_COMMAND_EXIT%"=="FAILURE" (
+	REM If command fails:
+	REM ECHO DEBUGGING: Command failed^^!
+	ECHO:
+	IF %_FILE_SIZE% GTR 0 (
+		ECHO Error output text:
+		ECHO - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		TYPE "%_ERROR_OUTPUT_FILE%"
+		ECHO - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		ECHO:
+	) ELSE (
+		REM ECHO DEBUGGING: No error msg found.
+	)
+	DEL /Q "%_ERROR_OUTPUT_FILE%" & REM Clean-up temp file ASAP.
+	PAUSE
+	GOTO Main
+)
+IF EXIST "%_TEXT_OUTPUT_FILE%" DEL /Q "%_TEXT_OUTPUT_FILE%" & REM Clean-up temp file ASAP.
+IF EXIST "%_ERROR_OUTPUT_FILE%" DEL /Q "%_ERROR_OUTPUT_FILE%" & REM Clean-up temp file ASAP.
+pause
+GOTO SYSADMIN
+
+:NETPURGE
+cls
+cd c:\ 
+echo Starting FlushDNS
+	@echo off 
+	ipconfig /flushdns
+echo Ok.
+echo.
+echo Start the WinSock
+	@echo off 
+	netsh winsock reset catalog
+echo.
+echo Starting ARPcache
+	@echo off 
+	netsh interface ip delete arpcache
+echo Ok.
+echo.
+echo Cleaning the log file
+	@echo off 
+	netsh int ip reset c:resetlog.txt
+echo Ok.
+echo.
+echo NetPURGE OK
+echo.
+echo Network Card restart (release/renew)
+	@echo off
+	ipconfig /release
+	ipconfig /renew
+echo.
+echo Remember to restart your computer.
+echo.
+echo ######################################
+echo.
+pause
+goto SYSADMIN
 
 :BADCHOICE
 echo -----------
